@@ -73,7 +73,8 @@ class CelestialBody{
 
   update(){
     if(this.celestialBinding){
-      this.position = this.position.rotate(this.celestialBinding.x, this.celestialBinding.y, this.speed);
+      let radians = degToRad(this.speed);
+      this.position = this.position.rotate(this.celestialBinding.x, this.celestialBinding.y, radians);
     }
   }
 }

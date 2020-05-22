@@ -1,4 +1,4 @@
-const SPEED_MULTIPLIER = 0.05;
+const SPEED_MULTIPLIER = 0.01;
 const SCALE = 0.5;
 
 // Init Solar System object

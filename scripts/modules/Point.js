@@ -1,3 +1,7 @@
+function degToRad(degrees){
+  return degrees * Math.PI / 180;
+}
+
 class Point{
   constructor(x, y){
     this._x = x;
@@ -48,7 +52,7 @@ class Point{
   }
 
   rotate(centerX, centerY, theta){
-    let translated = this.add(new Point(-centerX, -centerY));
+    let translated = this.subtract(new Point(centerX, centerY));
     let multiplied = translated.multiply(new Point(Math.cos(theta), Math.sin(theta)));
     return multiplied.add(new Point(centerX, centerY));
   }
