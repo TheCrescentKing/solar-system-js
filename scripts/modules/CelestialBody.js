@@ -72,6 +72,8 @@ class CelestialBody{
   }
 
   update(){
-    this.position = this.position.rotate(this.celestialBinding.x, this.celestialBinding.y, this.speed);
+    if(this.celestialBinding){
+      this.position = this.position.rotate(this.celestialBinding.x, this.celestialBinding.y, this.speed);
+    }
   }
 }
