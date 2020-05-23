@@ -96,7 +96,7 @@ class CelestialBody{
 
   update(){
     // If we have moons we have to record the position before the planet rotates and correct the moons position
-    // Otherwise the moons would not travel with the planet and would get further away from the planet (even if they would still rotate around it )
+    // Otherwise the moons would not travel with the planet and would get further away from the planet (even if they would still rotate around it)
     let beforePosition = 0;
     if(this.satellites){
       beforePosition = this.position;
