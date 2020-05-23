@@ -1,11 +1,12 @@
 class CelestialBody{
-  constructor(name, position, size, speedRadians, colour, celestialBinding){
+  constructor(name, position, size, speedRadians, colour, celestialBinding, satellites){
     this._name = name;
     this._position = position;
     this._speed = speedRadians;
     this._colour = colour;
     this._size = size;
     this._celestialBinding = celestialBinding;
+    this._satellites = satellites;
   }
 
   get name(){
@@ -64,17 +65,53 @@ class CelestialBody{
     this._celestialBinding = celestialBinding;
   }
 
+  get satellites(){
+    return this._satellites;
+  }
+
+  set satellites(satellites){
+    this._satellites = satellites;
+  }
+
+  updateSatellites(positionChange){
+    let satellites = this.satellites;
+    for (let key in satellites){
+      satellites[key].position = satellites[key].position.add(positionChange);
+      satellites[key].update();
+    }
+  }
+
   draw(ctx){
     ctx.beginPath();
     ctx.fillStyle = this.colour;
     ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
     ctx.fill();
+
+    if(this.satellites){
+      for (let key in this.satellites){
+        this.satellites[key].draw(ctx);
+      }
+    }
   }
 
   update(){
+    // If we have moons we have to record the position before the planet rotates and correct the moons position
+    // Otherwise the moons would not travel with the planet and would get further away from the planet (even if they would still rotate around it )
+    let beforePosition = 0;
+    if(this.satellites){
+      beforePosition = this.position;
+    }
+
     if(this.celestialBinding){
       let radians = degToRad(this.speed);
-      this.position = this.position.rotate(this.celestialBinding.x, this.celestialBinding.y, radians);
+      let celestialBindingX = this.celestialBinding.x;
+      let celestialBindingY = this.celestialBinding.y;
+      this.position = this.position.rotate(celestialBindingX, celestialBindingY, radians);
+    }
+
+    if(this.satellites){
+      let positionChange = this.position.subtract(beforePosition);
+      this.updateSatellites(positionChange);
     }
   }
 }

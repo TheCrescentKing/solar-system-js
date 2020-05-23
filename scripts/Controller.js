@@ -23,29 +23,40 @@ for (let key in planets){
     planet.colour,
     solarSystem.celestialBodies[planet.binding]);
 
+
+  if (planets[key].satellites){
+    currentPlanetObj.satellites = initSatellites(currentPlanetObj, planets[key].satellites);
+  }
+
   solarSystem.celestialBodies[key] = currentPlanetObj;
   pos += 50;
 }
 
-// Init moons from moons.js
 
-for (let key in moons){
+function initSatellites(planet, satellites){
 
-  let moon = moons[key];
-  let bindingBody = solarSystem.celestialBodies[moon.binding];
+  let satelliteCollection = {};
 
-  let currentMoon = new CelestialBody(moon.name,
-    new Point(
-      bindingBody.x + moon.position,
-      bindingBody.y + moon.position
-    ),
-    moon.size*SCALE,
-    moon.speed*SPEED_MULTIPLIER,
-    moon.colour,
-    bindingBody);
+  for (let key in satellites){
 
-    solarSystem.celestialBodies[key] = currentMoon;
+    let satellite = satellites[key];
+
+    let currentSatellite = new CelestialBody(satellite.name,
+      new Point(
+        planet.x + satellite.position,
+        planet.y + satellite.position
+      ),
+      satellite.size*SCALE,
+      satellite.speed*SPEED_MULTIPLIER,
+      satellite.colour,
+      planet);
+
+      satelliteCollection[key] = currentSatellite;
+    }
+
+    return satelliteCollection;
 }
+
 
 
 // Animation Loop
