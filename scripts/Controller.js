@@ -1,5 +1,5 @@
 const SPEED_MULTIPLIER = 0.01;
-const SCALE = 0.5;
+const SCALE = 1;
 
 // Init Solar System object
 
@@ -32,7 +32,12 @@ for (let key in planets){
   pos += 50;
 }
 
+// function initImage(name){
+//   let imgTag = '<img src="'+ name.toLowerCase() + '" id="celestialImage" alt="' + name + '"/>';
+//
+// }
 
+// Init satellites if present in planet object
 function initSatellites(planet, satellites){
 
   let satelliteCollection = {};

@@ -7,6 +7,13 @@ class CelestialBody{
     this._size = size;
     this._celestialBinding = celestialBinding;
     this._satellites = satellites;
+
+    // Load image
+    this._imgLoaded = {isLoaded: false};
+    this._img = new Image();
+    this._img.src = "images/" + this.name.toLowerCase() + ".png"; // Try to load image
+    let imgLoadedObj = this._imgLoaded;
+    this._img.onload = function () {imgLoadedObj.isLoaded = true;};
   }
 
   get name(){
@@ -82,10 +89,18 @@ class CelestialBody{
   }
 
   draw(ctx){
-    ctx.beginPath();
-    ctx.fillStyle = this.colour;
-    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-    ctx.fill();
+
+    if(this._imgLoaded.isLoaded){
+      let topLeftCornerX = this.x - this.size/2;
+      let topLeftCornerY = this.y - this.size/2;
+      ctx.drawImage(this._img, topLeftCornerX, topLeftCornerY, this.size, this.size);
+    }else{
+      ctx.beginPath();
+      ctx.fillStyle = this.colour;
+      ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
 
     if(this.satellites){
       for (let key in this.satellites){
