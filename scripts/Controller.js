@@ -1,5 +1,5 @@
-const SPEED_MULTIPLIER = 0.01;
-const SCALE = 0.51;
+const SPEED_MULTIPLIER = 0.1;
+const SCALE = 1;
 
 // Init Solar System object
 
@@ -12,7 +12,7 @@ let solarSystem = {
 // Init planets from planets.js
 // Calculate max distance so that planets (Pluto) don't dissapear on the bottom of the screen
 // Remember to take Sun's size into account
-let maxDistance = height/2 - planets['pluto'].size - solarSystem.celestialBodies.sun.size;
+let maxDistance = height/2 - planets['pluto'].size*SCALE - solarSystem.celestialBodies.sun.size;
 // Divide maximum distance between number of planets
 let distanceBetweenPlanets = maxDistance/Object.keys(planets).length;
 
