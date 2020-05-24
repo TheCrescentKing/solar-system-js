@@ -93,7 +93,8 @@ class CelestialBody{
     if(this._imgLoaded.isLoaded){
       let topLeftCornerX = this.x - this.size/2;
       let topLeftCornerY = this.y - this.size/2;
-      ctx.drawImage(this._img, topLeftCornerX, topLeftCornerY, this.size, this.size);
+      // Have to correct size otherwise images are half the size of the drawn versions
+      ctx.drawImage(this._img, topLeftCornerX, topLeftCornerY, this.size*2, this.size*2);
     }else{
       ctx.beginPath();
       ctx.fillStyle = this.colour;

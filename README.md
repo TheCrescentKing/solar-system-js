@@ -1,5 +1,8 @@
 # solar-system-js
-Lockdown Pet Project: An animation of the Solar System in JavaScript
+Lockdown Pet Project: An animation of the Solar System in JavaScript.
+
+I used OOP principles to learn ECMAScript classes for this project.
+Also tried to implement a makeshift Model-View-Controller structure.
 
 
 <h3>How to run</h3>

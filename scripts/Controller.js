@@ -1,5 +1,5 @@
 const SPEED_MULTIPLIER = 0.01;
-const SCALE = 1;
+const SCALE = 0.51;
 
 // Init Solar System object
 
@@ -10,14 +10,21 @@ let solarSystem = {
 }
 
 // Init planets from planets.js
+// Calculate max distance so that planets (Pluto) don't dissapear on the bottom of the screen
+// Remember to take Sun's size into account
+let maxDistance = height/2 - planets['pluto'].size - solarSystem.celestialBodies.sun.size;
+// Divide maximum distance between number of planets
+let distanceBetweenPlanets = maxDistance/Object.keys(planets).length;
 
-let pos = 80;
+// Initiate starting distance to be size of sun + distanceBetweenPlanets
+let distance = solarSystem.celestialBodies.sun.size + distanceBetweenPlanets;
+
 for (let key in planets){
 
   let planet = planets[key];
 
   let currentPlanetObj = new CelestialBody(planets[key].name,
-    new Point(width/2 + pos, solarSystem.celestialBodies.sun.y),
+    new Point(width/2 + distance, solarSystem.celestialBodies.sun.y),
     planet.size*SCALE,
     planet.speed*SPEED_MULTIPLIER,
     planet.colour,
@@ -29,7 +36,7 @@ for (let key in planets){
   }
 
   solarSystem.celestialBodies[key] = currentPlanetObj;
-  pos += 50;
+  distance += distanceBetweenPlanets;
 }
 
 // function initImage(name){
