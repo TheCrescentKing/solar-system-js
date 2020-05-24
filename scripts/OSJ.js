@@ -1,7 +1,3 @@
-/*jshint node: true */
-/*jshint esversion: 6 */
-"use strict";
-
 /* Shorthand functions */
 
 function O(i){
